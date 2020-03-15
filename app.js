@@ -4,9 +4,6 @@ const express = require('express');
 //invoke express
 const app = express();
 
-//routes
-const users = require("./routes/api/users");
-const tweets = require("./routes/api/tweets");
 
 //mongoose init
 const mongoose = require('mongoose');
@@ -15,11 +12,16 @@ mongoose
     .connect(db, { useUnifiedTopology: true, useNewUrlParser: true })
     .then(() => console.log("Connected to MongoDB successfully"))
     .catch(err => console.log(err));
-
+    
+//routes
+const users = require("./routes/api/users");
+const tweets = require("./routes/api/tweets");
+    
 //passport (jwt strategy token thing)
 const passport = require('passport');
 require('./config/passport')(passport);
-
+    
+    
 //bodyParser for json
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
